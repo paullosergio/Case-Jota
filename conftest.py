@@ -1,21 +1,10 @@
-import os
-
-import pytest
+from django.conf import settings
 
 
-@pytest.fixture(scope="session")
-def docker_compose_file(pytestconfig):
-    return os.path.join(str(pytestconfig.rootdir), "docker-compose.test.yml")
-
-
-@pytest.fixture(scope="session")
-def docker_compose_project_name():
-    return "news_test"
-
-
-@pytest.fixture(scope="session")
-def docker_services(docker_compose, docker_compose_project_name):
-    """Ensure all services are up and running."""
-    docker_compose.up()
-    yield
-    docker_compose.down()
+def pytest_configure():
+    settings.DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": ":memory:",
+        }
+    }

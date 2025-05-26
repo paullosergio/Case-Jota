@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
 import os
+import sys
 from datetime import timedelta
 from pathlib import Path
 
@@ -107,7 +108,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "test_db",
+        "NAME": "news_db",
         "USER": "postgres",
         "PASSWORD": "postgres",
         "HOST": "localhost",
@@ -115,6 +116,13 @@ DATABASES = {
     }
 }
 
+if "pytest" in sys.modules:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": ":memory:",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators

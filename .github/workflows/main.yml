@@ -14,7 +14,7 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: test_db
+          POSTGRES_DB: news_db
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
         ports:
@@ -41,14 +41,14 @@ jobs:
 
     - name: Run migrations
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/news_db
       run: |
         python manage.py makemigrations
         python manage.py migrate
 
     - name: Run tests
       env:
-        DATABASE_URL: postgres://postgres:postgres@localhost:5432/test_db
+        DATABASE_URL: postgres://postgres:postgres@localhost:5432/news_db
         DJANGO_SETTINGS_MODULE: core.settings
       run: |
         pytest 
