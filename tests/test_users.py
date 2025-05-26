@@ -15,9 +15,12 @@ def api_client():
 def test_user():
     return User.objects.create_user(username="testuser", email="test@example.com", password="testpass123")
 
+
 @pytest.fixture
-def admin_user(db):
-    return User.objects.create_user(username="admin",  email="test@example.com", password="admin123", is_staff=True, role="admin")
+def admin_user():
+    return User.objects.create_user(
+        username="admin", email="test@example.com", password="admin123", is_staff=True, role="admin"
+    )
 
 
 @pytest.mark.django_db
