@@ -12,7 +12,7 @@ Este é um projeto Django que utiliza Django Rest Framework (DRF) para APIs REST
 
 1. Clone o repositório:
 ```bash
-git clone [https://github.com/paullosergio/Case-Jota.git]
+git clone https://github.com/paullosergio/Case-Jota.git
 cd [NOME_DO_DIRETÓRIO]
 ```
 
@@ -38,7 +38,6 @@ pip install -r requirements.txt
 POSTGRES_DB=exemplo
 POSTGRES_USER=exemplo
 POSTGRES_PASSWORD=exemplo
-
 ```
 
 3. Inicie os containers:
@@ -95,4 +94,49 @@ celery -A core flower
 - Redis está configurado como broker para o Celery
 - Arquivos de mídia são servidos em `/media/`
 - Arquivos estáticos são servidos em `/static/`
+
+## Testes
+
+O projeto utiliza pytest para testes. Os testes estão organizados em dois arquivos principais:
+
+1. `tests/test_news.py`: Testes para a API de notícias
+2. `tests/test_users.py`: Testes para a API de usuários
+
+### Executando os Testes
+
+1. Instale as dependências de teste:
+```bash
+pip install pytest pytest-django pytest-cov
+```
+
+2. Execute todos os testes:
+```bash
+pytest
+```
+
+3. Execute testes com cobertura:
+```bash
+pytest --cov=.
+```
+
+4. Execute testes específicos:
+```bash
+pytest tests/test_news.py  # Testes da API de notícias
+pytest tests/test_users.py  # Testes da API de usuários
+```
+
+### Estrutura dos Testes
+
+Os testes incluem:
+
+- Testes de registro e autenticação de usuários
+- Testes de CRUD para notícias
+- Testes de autorização e permissões
+- Testes de endpoints da API
+
+Cada teste verifica:
+- Status codes corretos
+- Respostas esperadas
+- Validação de dados
+- Comportamento de autenticação
 
